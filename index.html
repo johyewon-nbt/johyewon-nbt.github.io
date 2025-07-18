@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script type="text/javascript" src="adison-global-interface.js"></script>
+    <script type="text/javascript" src="adison-interface.js"></script>
     <style>
         .title {
             font-family: AppleSDGothicNeo;
@@ -33,40 +33,25 @@
         }
 
     </style>
-    <title>글로벌 JavascriptInterface Test</title>
+    <title>Core JavascriptInterface Test</title>
 </head>
 <body>
 
-    <h1 class="title">글로벌 JavascriptInterface Test</h1>
+    <h1 class="title">Core JavascriptInterface Test</h1>
     <input type="button" class="button" onclick="window.close()" value="웹뷰 닫기"/>
     <input type="button" class="button" onclick="window.perform('')" value="perform 실행"/>
     <input type="button" class="button" onclick="window.open('', '')" value="내부 화면 열기"/>
     <input type="button" class="button" onclick="window.openExternal('', '')" value="외부 화면 열기"/>
-    <input type="button" class="button" onclick="window.getDeviceModel().then((result) => {
-                alert(result.device_model)
-            }).catch((e) => {
-                console.error('An error is detected while loading ad: ' + e.message);
-            })" value="디바이스 모델"/>
     <input type="button" class="button" onclick="window.getUid().then((result) => {
                 alert(result.uid)
             }).catch((e) => {
                 console.error('An error is detected while loading ad: ' + e.message);
             })" value="getUid 호출"/>
-    <input type="button" class="button" onclick="window.getNUid().then((result) => {
-                alert(result.n_uid)
-            }).catch((e) => {
-                console.error('An error is detected while loading ad: ' + e.message);
-            })" value="getNUid 호출"/>
     <input type="button" class="button" onclick="window.getAdvertisingId().then((result) => {
                 alert(result.advertising_id)
             }).catch((e) => {
                 console.error('An error is detected while loading ad: ' + e.message);
             })" value="getAdvertisingId 호출"/>
-    <input type="button" class="button" onclick="window.getNAdvertisingId().then((result) => {
-                alert(result.n_advertising_id)
-            }).catch((e) => {
-                console.error('An error is detected while loading ad: ' + e.message);
-            })" value="getNAdvertisingId 호출"/>
     <input type="button" class="button" onclick="window.getAppVersion().then((result) => {
                 alert(result.app_version)
             }).catch((e) => {
@@ -86,7 +71,6 @@
     <input type="button" class="button" onclick="window.showAlert('테스트')" value="showAlert"/>
     <input type="button" class="button" onclick="window.showAlert('', '')" value="showAlert Options"/>
     <input type="button" class="button" onclick="window.showDialog('', '')" value="ShowDialog"/>
-    <input type="button" class="button" onclick="window.onUserAction('', '')" value="onUserAction"/>
 
 </body>
 </html>
