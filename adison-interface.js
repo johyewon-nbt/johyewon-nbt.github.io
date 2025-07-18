@@ -32,12 +32,12 @@ function perform(uriString) {
     }
 }
 
-function open(uriString, options) {
+function open(uriString) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        SharedWeb.open(uriString, options);
+        SharedWeb.open(uriString);
     } else {
-        iOSPostMessageHandler("open", uriString, options);
+        iOSPostMessageHandler("open", uriString);
     }
 }
 
