@@ -45,7 +45,7 @@
     <input type="button" class="button" onclick="window.getUid()" value="getUid 호출"/>
     <input type="button" class="button" onclick="window.getAdvertisingId()" value="getAdvertisingId 호출"/>
     <input type="button" class="button" onclick="window.getSdkVersion().then((result) => {
-                alert(result.sdk_version)
+                alert(result)
             }).catch((e) => {
                 console.error('An error is detected while loading ad: ' + e.message);
             })" value="getSdkVersion 호출"/>
