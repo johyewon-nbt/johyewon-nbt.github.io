@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="adison-interface.js"></script>
+    <style>
+        .title {
+            font-family: AppleSDGothicNeo;
+            font-size: 20px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.6px;
+            text-align: center;
+            color: #000000;
+            padding: 22px 0 17px;
+        }
+
+        .button {
+            width: 100%;
+            background-color: #778899;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 8px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+    </style>
+    <title>Core JavascriptInterface Test</title>
+</head>
+<body>
+
+    <h1 class="title">Core JavascriptInterface Test</h1>
+    <input type="button" class="button" onclick="window.close()" value="웹뷰 닫기"/>
+    <input type="button" class="button" onclick="window.perform(`adison://offerwall/ads`)" value="perform 실행"/>
+    <input type="button" class="button" onclick="window.open(`adison://offerwall/ads/10257`)" value="내부 화면 열기"/>
+    <input type="button" class="button" onclick="window.openExternal(`https://nbt.com`, '')" value="외부 화면 열기"/>
+    <input type="button" class="button" onclick="window.getUid()" value="getUid 호출"/>
+    <input type="button" class="button" onclick="window.getBirthYear()" value="getBirthYear 호출"/>
+    <input type="button" class="button" onclick="window.getGender()" value="getGender 호출"/>
+    <input type="button" class="button" onclick="window.getAdvertisingId()" value="getAdvertisingId 호출"/>
+    <input type="button" class="button" onclick="window.getSdkVersion()" value="getSdkVersion 호출"/>
+    <input type="button" class="button" onclick="window.setTitle('테스트')" value="타이틀 변경"/>
+    <input type="button" class="button" onclick="window.showAlert('테스트')" value="showAlert"/>
+    <input type="button" class="button" onclick="window.showAlert('', '')" value="showAlert Options"/>
+    <input type="button" class="button" onclick="window.showConfirm('이 작업을 진행하시겠습니까?', '확인', '', '취소', '')" value="showConfirm 호출"/>
+    <input type="button" class="button" onclick="window.copyToClipboard('텍스트 복사 중입니다')" value="copyToClipboard"/>
+
+</body>
+</html>
