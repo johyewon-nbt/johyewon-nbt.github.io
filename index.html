@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="adison-global-interface.js"></script>
+    <style>
+        .title {
+            font-family: AppleSDGothicNeo;
+            font-size: 20px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.6px;
+            text-align: center;
+            color: #000000;
+            padding: 22px 0 17px;
+        }
+
+        .button {
+            width: 100%;
+            background-color: #778899;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 8px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+    </style>
+    <title>글로벌 JavascriptInterface Test</title>
+</head>
+<body>
+
+    <h1 class="title">글로벌 JavascriptInterface Test</h1>
+    <input type="button" class="button" onclick="window.close()" value="웹뷰 닫기"/>
+    <input type="button" class="button" onclick="window.perform('')" value="perform 실행"/>
+    <input type="button" class="button" onclick="window.open('', '')" value="내부 화면 열기"/>
+    <input type="button" class="button" onclick="window.openExternal('', '')" value="외부 화면 열기"/>
+    <input type="button" class="button" onclick="window.getDeviceModel().then((result) => {
+                alert(result.device_model)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="디바이스 모델"/>
+    <input type="button" class="button" onclick="window.getUid().then((result) => {
+                alert(result.uid)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getUid 호출"/>
+    <input type="button" class="button" onclick="window.getNUid().then((result) => {
+                alert(result.n_uid)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getNUid 호출"/>
+    <input type="button" class="button" onclick="window.getAdvertisingId().then((result) => {
+                alert(result.advertising_id)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getAdvertisingId 호출"/>
+    <input type="button" class="button" onclick="window.getNAdvertisingId().then((result) => {
+                alert(result.n_advertising_id)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getNAdvertisingId 호출"/>
+    <input type="button" class="button" onclick="window.getAppVersion().then((result) => {
+                alert(result.app_version)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getAppVersion 호출"/>
+    <input type="button" class="button" onclick="window.getOSVersion().then((result) => {
+                alert(result.os_version)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getOSVersion 호출"/>
+    <input type="button" class="button" onclick="window.getSdkVersion().then((result) => {
+                alert(result.sdk_version)
+            }).catch((e) => {
+                console.error('An error is detected while loading ad: ' + e.message);
+            })" value="getSdkVersion 호출"/>
+    <input type="button" class="button" onclick="window.setTitle('테스트')" value="타이틀 변경"/>
+    <input type="button" class="button" onclick="window.showAlert('테스트')" value="showAlert"/>
+    <input type="button" class="button" onclick="window.showAlert('', '')" value="showAlert Options"/>
+    <input type="button" class="button" onclick="window.showDialog('', '')" value="ShowDialog"/>
+    <input type="button" class="button" onclick="window.onUserAction('', '')" value="onUserAction"/>
+
+</body>
+</html>
