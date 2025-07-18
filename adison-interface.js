@@ -170,14 +170,18 @@ function showAlert(message, callback) {
     }
 }
 
-function showConfirm(message, options) {
+function showConfirm(message, positiveText, positiveCallback, negativeText, negativeCallback) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        SharedWeb.showConfirm(message, options);
+        SharedWeb.showConfirm(message, positiveText, positiveCallback, negativeText, negativeCallback);
     } else {
         window.webkit.messageHandlers.SharedWeb.postMessage({
             command: "showConfirm",
             message: message,
+            positiveText: positiveText,
+            positiveCallback: positiveCallback,
+            negativeText: negativeText,
+            negativeCallback: negativeCallback
         });
     }
 }
