@@ -50,91 +50,27 @@ function openExternal(uriString, options) {
     }
 }
 
-function getDeviceModel() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        window.SharedWeb.getDeviceModel(rand_1);
-    } else {
-        iOSPostMessageHandler("getDeviceModel", rand_1);
-    }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
-}
 
 function getUid() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        window.SharedWeb.getUid(rand_1);
+        var uid = window.SharedWeb.getUid();
+        alert("uid = " + uid);
     } else {
-        iOSPostMessageHandler("getUid", rand_1);
+        var uid = iOSPostMessageHandler("getUid");
+        alert("uid = " + uid);
     }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
 }
 
-function getNUid() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
+function getGender() {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        window.SharedWeb.getNUid(rand_1);
+        var gender = window.SharedWeb.getGender();
+        alert("gender = " + gender);
     } else {
-        iOSPostMessageHandler("getNUid", rand_1);
+        var uid = iOSPostMessageHandler("getGender");
+        alert("gender = " + gender);
     }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
 }
 
 function getAdvertisingId() {
@@ -154,122 +90,6 @@ function getAdvertisingId() {
         window.SharedWeb.getAdvertisingId(rand_1);
     } else {
         iOSPostMessageHandler("getAdvertisingId", rand_1);
-    }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
-}
-
-function getNAdvertisingId() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        window.SharedWeb.getNAdvertisingId(rand_1);
-    } else {
-        iOSPostMessageHandler("getNAdvertisingId", rand_1);
-    }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
-}
-
-function getAppVersion() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        window.SharedWeb.getAppVersion(rand_1);
-    } else {
-        iOSPostMessageHandler("getAppVersion", rand_1);
-    }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
-}
-
-function getOSVersion() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        window.SharedWeb.getOSVersion(rand_1);
-    } else {
-        iOSPostMessageHandler("getOSVersion", rand_1);
-    }
-
-    return new Promise(function (resolve, reject) {
-        window[rand_1].resolve = function (data) {
-            resolve(data);
-        };
-        window[rand_1].reject = function (err) {
-            return reject(err);
-        };
-    });
-}
-
-function getSdkVersion() {
-    var _this = this;
-    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
-    window[rand_1] = {};
-    // func called from android
-    window[rand_1].callback = function (isSuccess, result) {
-        console.log("rand", rand_1, isSuccess, result);
-        if (isSuccess) window[rand_1].resolve(result);
-        else window[rand_1].reject(result);
-        delete window[rand_1]; // clean up
-    };
-
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        window.SharedWeb.getSdkVersion(rand_1);
-    } else {
-        iOSPostMessageHandler("getSdkVersion", rand_1);
     }
 
     return new Promise(function (resolve, reject) {
@@ -319,28 +139,24 @@ function showAlert(message, callback) {
     }
 }
 
-function showDialog(message, options) {
+function showConfirm(message, options) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        SharedWeb.showDialog(message, options);
+        SharedWeb.showConfirm(message, options);
     } else {
         window.webkit.messageHandlers.SharedWeb.postMessage({
-            command: "showDialog",
+            command: "showConfirm",
             message: message,
         });
     }
 }
 
-function onUserAction(event, params) {
+function copyToClipboard(text) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        SharedWeb.onUserAction(event, params);
+        SharedWeb.copyToClipboard(text);
     } else {
-        window.webkit.messageHandlers.SharedWeb.postMessage({
-            command: "onUserAction",
-            event: event,
-            params: params,
-        });
+        iOSPostMessageHandler("copyToClipboard");
     }
 }
 
