@@ -62,6 +62,17 @@ function getUid() {
     }
 }
 
+function getBirthYear() {
+    const platform = getPlatform();
+    if (platform == androidPlatform) {
+        var uid = window.SharedWeb.getBirthYear();
+        alert("uid = " + uid);
+    } else {
+        var uid = iOSPostMessageHandler("getBirthYear");
+        alert("uid = " + uid);
+    }
+}
+
 function getGender() {
     const platform = getPlatform();
     if (platform == androidPlatform) {
