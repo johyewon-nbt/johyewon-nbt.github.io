@@ -102,6 +102,37 @@ function getAdvertisingId() {
     });
 }
 
+
+function getSdkVersion() {
+    var _this = this;
+    var rand_1 = "asyncJava_" + Math.floor(Math.random() * 1000000);
+    window[rand_1] = {};
+    // func called from android
+    window[rand_1].callback = function (isSuccess, result) {
+        console.log("rand", rand_1, isSuccess, result);
+        if (isSuccess) window[rand_1].resolve(result);
+        else window[rand_1].reject(result);
+        delete window[rand_1]; // clean up
+    };
+
+    const platform = getPlatform();
+    if (platform == androidPlatform) {
+        window.SharedWeb.getSdkVersion(rand_1);
+    } else {
+        iOSPostMessageHandler("getSdkVersion", rand_1);
+    }
+
+    return new Promise(function (resolve, reject) {
+        window[rand_1].resolve = function (data) {
+            resolve(data);
+        };
+        window[rand_1].reject = function (err) {
+            return reject(err);
+        };
+    });
+}
+
+
 function setTitle(title) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
