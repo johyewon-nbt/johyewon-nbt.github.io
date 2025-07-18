@@ -65,11 +65,11 @@ function getUid() {
 function getBirthYear() {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        var uid = window.SharedWeb.getBirthYear();
-        alert("uid = " + uid);
+        var birthYear = window.SharedWeb.getBirthYear();
+        alert("birthYear = " + birthYear);
     } else {
-        var uid = iOSPostMessageHandler("getBirthYear");
-        alert("uid = " + uid);
+        var birthYear = iOSPostMessageHandler("getBirthYear");
+        alert("birthYear = " + birthYear);
     }
 }
 
