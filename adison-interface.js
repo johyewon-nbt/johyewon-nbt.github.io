@@ -155,8 +155,8 @@ function showAlert(message, callback) {
 
 function showConfirm(message, positiveText, negativeText) {
     const platform = getPlatform();
-    const positiveCallback = "onConfirm";
-    const negativeCallback = "onCancel";
+    const positiveCallback = "onConfirm()";
+    const negativeCallback = "onCancel()";
     if (platform == androidPlatform) {
         SharedWeb.showConfirm(message, positiveText, positiveCallback, negativeText, negativeCallback);
     } else {
