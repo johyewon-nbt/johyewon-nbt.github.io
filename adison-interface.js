@@ -46,7 +46,7 @@ function openExternal(uriString, options) {
     if (platform == androidPlatform) {
         SharedWeb.openExternal(uriString, options);
     } else {
-        iOSPostMessageHandler("openExternal", uriString, options);
+        iOSPostMessageHandler("openExternal", { uriString: uriString, options: options });
     }
 }
 
@@ -147,28 +147,23 @@ function setTitle(title) {
     }
 }
 
-function showAlert(message) {
-    const platform = getPlatform();
-    if (platform == androidPlatform) {
-        SharedWeb.showAlert(message);
-    } else {
-        window.webkit.messageHandlers.SharedWeb.postMessage({
-            command: "showAlert",
-            message: message,
-        });
-    }
-}
-
 function showAlert(message, callback) {
     const platform = getPlatform();
     if (platform == androidPlatform) {
-        SharedWeb.showAlert(message, callback);
+        if (callback) {
+            SharedWeb.showAlert(message, callback);
+        } else {
+            SharedWeb.showAlert(message);
+        }
     } else {
-        window.webkit.messageHandlers.SharedWeb.postMessage({
+        const payload = {
             command: "showAlert",
             message: message,
-            callback: callback,
-        });
+        };
+        if (callback) {
+            payload.callback = callback;
+        }
+        window.webkit.messageHandlers.SharedWeb.postMessage(payload);
     }
 }
 
@@ -193,13 +188,14 @@ function copyToClipboard(text) {
     if (platform == androidPlatform) {
         SharedWeb.copyToClipboard(text);
     } else {
-        iOSPostMessageHandler("copyToClipboard");
+        iOSPostMessageHandler("copyToClipboard", text);
     }
 }
 
-function iOSPostMessageHandler(command, callback) {
-    webkit.messageHandlers.SharedWeb.postMessage({
-        command: command,
-        callback: callback,
-    });
+function iOSPostMessageHandler(command, data) {
+    const payload = { command: command };
+    if (data !== undefined) {
+        payload.data = data;
+    }
+    webkit.messageHandlers.SharedWeb.postMessage(payload);
 }
