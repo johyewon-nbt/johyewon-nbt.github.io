@@ -95,13 +95,6 @@ function getAdvertisingId() {
     }
 }
 
-/**
- * SharedWebViewJsInterface.getSdkVersion() (동기 반환) 사용
- * - Android: 바로 String? 반환 (예: "1.0.0" 또는 null)
- * - JS에서 통일 포맷으로 가공: { "sdk_version": "<value>" }
- * - 실패 시: {}
- * - 성공 여부 alert 포함
- */
 function getSdkVersion() {
     const platform = getPlatform();
     var isSuccess = false;
@@ -109,19 +102,15 @@ function getSdkVersion() {
 
     if (platform === androidPlatform) {
         try {
-            var v = window.SharedWeb.getSdkVersion(); // 동기 호출!
+            var v = window.SharedWeb.getSdkVersion();
             if (v != null && v !== "") {
                 jsonStr = JSON.stringify({ sdk_version: String(v) });
                 isSuccess = true;
             }
         } catch (e) {
-            // 그대로 fail 유지
         }
     } else {
-        // iOS 쪽은 아직 명세가 없으므로 messageHandler로 요청 후 기본 실패 처리
-        // 필요하면 나중에 iOS 대응 추가
         try {
-            // 비동기 구조라면 별도 구현 필요. 지금은 자리표시.
             window.webkit?.messageHandlers?.SharedWeb?.postMessage({
                 command: "getSdkVersion"
             });
@@ -129,11 +118,8 @@ function getSdkVersion() {
     }
 
     alert("getSdkVersion success=" + isSuccess + " / result=" + jsonStr);
-    return jsonStr; // 호출자에서 원하면 JSON.parse 해서 사용
+    return jsonStr;
 }
-
-// 기존 코드 스타일: window.* 에 바인딩
-window.getSdkVersion = getSdkVersion;
 
 function setTitle(title) {
     const platform = getPlatform();
@@ -167,8 +153,10 @@ function showAlert(message, callback) {
     }
 }
 
-function showConfirm(message, positiveText, positiveCallback, negativeText, negativeCallback) {
+function showConfirm(message, positiveText, negativeText) {
     const platform = getPlatform();
+    const positiveCallback = "onConfirm";
+    const negativeCallback = "onCancel";
     if (platform == androidPlatform) {
         SharedWeb.showConfirm(message, positiveText, positiveCallback, negativeText, negativeCallback);
     } else {
@@ -181,6 +169,14 @@ function showConfirm(message, positiveText, positiveCallback, negativeText, nega
             negativeCallback: negativeCallback
         });
     }
+}
+
+function onConfirm() {
+    alert("확인 누름");
+}
+
+function onCancel() {
+    alert("취소 누름");
 }
 
 function copyToClipboard(text) {
