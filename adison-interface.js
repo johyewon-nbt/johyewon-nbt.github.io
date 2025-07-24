@@ -92,13 +92,9 @@ function getAdvertisingId() {
     window[handleId].callback = function (isSuccess, result) {
         if (isSuccess) {
             alert("result: " + result);
-            try {
-                const parsed = JSON.parse(result);
-                alert("advertising_id: " + parsed.google_ad_id);
-            } catch (e) {
-                alert("파싱 실패: " + result);
-            }
+            window[handleId].resolve(result);
         } else {
+            window[handleId].reject(result);
             alert("getAdvertisingId 실패: " + result);
         }
         delete window[handleId]; 
@@ -117,7 +113,6 @@ function getAdvertisingId() {
     }
 }
 
-// 기존 스타일대로 window에 등록
 window.getAdvertisingId = getAdvertisingId;
 
 function getSdkVersion() {
@@ -128,13 +123,9 @@ function getSdkVersion() {
     window[handleId].callback = function (isSuccess, result) {
         if (isSuccess) {
             alert("result: " + result);
-            try {
-                const parsed = JSON.parse(result);
-                alert("sdk_version: " + parsed.sdk_version);
-            } catch (e) {
-                alert("파싱 실패: " + result);
-            }
+            window[handleId].resolve(result);
         } else {
+            window[handleId].reject(result);
             alert("getSdkVersion 실패: " + result);
         }
         delete window[handleId];
