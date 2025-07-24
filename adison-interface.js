@@ -86,13 +86,18 @@ function getGender() {
 
 function getAdvertisingId() {
     const platform = getPlatform();
+
     if (platform == androidPlatform) {
-        var adId = window.SharedWeb.getAdvertisingId();
+        var adId = window.SharedWeb.getAdvertisingId(getAdvertisingIdCallback);
         alert("advertising id = " + adId);
     } else {
         var adId = iOSPostMessageHandler("getAdvertisingId");
         alert("advertising id = " + adId);
     }
+}
+
+function getAdvertisingIdCallback(result) {
+    alert("advertising callback id = " + result);
 }
 
 function getSdkVersion() {
