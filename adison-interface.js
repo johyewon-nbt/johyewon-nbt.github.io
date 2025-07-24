@@ -91,9 +91,10 @@ function getAdvertisingId() {
 
     window[handleId].callback = function (isSuccess, result) {
         if (isSuccess) {
+            alert("result: " + result);
             try {
                 const parsed = JSON.parse(result);
-                alert("advertising_id: " + parsed.advertising_id);
+                alert("advertising_id: " + parsed.google_ad_id);
             } catch (e) {
                 alert("파싱 실패: " + result);
             }
@@ -121,29 +122,36 @@ window.getAdvertisingId = getAdvertisingId;
 
 function getSdkVersion() {
     const platform = getPlatform();
-    var isSuccess = false;
-    var jsonStr = "{}";
+    const handleId = "asyncJava_" + Math.floor(Math.random() * 1000000);
+    window[handleId] = {};
+
+    window[handleId].callback = function (isSuccess, result) {
+        if (isSuccess) {
+            alert("result: " + result);
+            try {
+                const parsed = JSON.parse(result);
+                alert("sdk_version: " + parsed.sdk_version);
+            } catch (e) {
+                alert("파싱 실패: " + result);
+            }
+        } else {
+            alert("getSdkVersion 실패: " + result);
+        }
+        delete window[handleId];
+    };
 
     if (platform === androidPlatform) {
-        try {
-            var v = window.SharedWeb.getSdkVersion();
-            if (v != null && v !== "") {
-                jsonStr = JSON.stringify({ sdk_version: String(v) });
-                isSuccess = true;
-            }
-        } catch (e) {
-        }
+        SharedWeb.getSdkVersion(handleId);
     } else {
         try {
             window.webkit?.messageHandlers?.SharedWeb?.postMessage({
-                command: "getSdkVersion"
+                command: "getSdkVersion",
+                handle_id: handleId
             });
         } catch (_) {}
     }
-
-    alert("getSdkVersion success=" + isSuccess + " / result=" + jsonStr);
-    return jsonStr;
 }
+window.getSdkVersion = getSdkVersion;
 
 function setTitle(title) {
     const platform = getPlatform();
