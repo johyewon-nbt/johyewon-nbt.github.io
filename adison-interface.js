@@ -86,19 +86,38 @@ function getGender() {
 
 function getAdvertisingId() {
     const platform = getPlatform();
+    const handleId = "asyncJava_" + Math.floor(Math.random() * 1000000);
+    window[handleId] = {};
 
-    if (platform == androidPlatform) {
-        var adId = window.SharedWeb.getAdvertisingId(getAdvertisingIdCallback);
-        alert("advertising id = " + adId);
+    window[handleId].callback = function (isSuccess, result) {
+        if (isSuccess) {
+            try {
+                const parsed = JSON.parse(result);
+                alert("advertising_id: " + parsed.advertising_id);
+            } catch (e) {
+                alert("파싱 실패: " + result);
+            }
+        } else {
+            alert("getAdvertisingId 실패: " + result);
+        }
+        delete window[handleId]; 
+    };
+
+    if (platform === androidPlatform) {
+        SharedWeb.getAdvertisingId(handleId);
     } else {
-        var adId = iOSPostMessageHandler("getAdvertisingId");
-        alert("advertising id = " + adId);
+        try {
+            window.webkit?.messageHandlers?.SharedWeb?.postMessage({
+                command: "getAdvertisingId",
+                handle_id: handleId
+            });
+        } catch (_) {
+        }
     }
 }
 
-function getAdvertisingIdCallback(result) {
-    alert("advertising callback id = " + result);
-}
+// 기존 스타일대로 window에 등록
+window.getAdvertisingId = getAdvertisingId;
 
 function getSdkVersion() {
     const platform = getPlatform();
